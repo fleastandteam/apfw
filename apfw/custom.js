@@ -3,11 +3,9 @@ const displayBagelTotal = document.querySelector('#bagel-total');
 displayBagelTotal.innerHTML = "0 &nbsp; Total Bagels";
 const totalMaxQty = 12;
 
-getAllInputs.forEach(getHtmlStuff);
-function getHtmlStuff(value) {
+getAllInputs.forEach(allInputs);
+function allInputs(value) {
 	value.addEventListener("input", function(e) {
-		// document.querySelector('.wapf-field-input input[type=number]').readOnly = true;
-		// console.log(value);
         e.preventDefault();
         sumTotal();
     });
@@ -22,24 +20,32 @@ function sumTotal() {
         };
     }
 
+	if (currentTotal == totalMaxQty) {
+		disableNum()
+	}
+
     if (currentTotal === 1) {
-        displayBagelTotal.innerHTML = `
-            <span class="display-total"> ${currentTotal} &nbsp; Total Bagel</span>
-        `;
+		plural = 'Bagel';
     } else {
-        displayBagelTotal.innerHTML = `
-            <span class="display-total"> ${currentTotal} &nbsp; Total Bagels</span>
-        `;
+		plural = 'Bagels';
     }
+
+	displayBagelTotal.innerHTML = `<span class="display-total"> ${currentTotal} &nbsp; Total ${plural}</span>`;
 }
 
 for (let i = 0; i < getAllInputs.length; i++) {
 	getAllInputs[i].max = totalMaxQty;
-    let getCurrentValue = getAllInputs;
-        
-    for (let i = 0; i < getCurrentValue.length; i++) {
-        let allCurrentValue = getCurrentValue[i];
-        let baseValue = parseInt(allCurrentValue.value);
-        let currentValue = parseInt(getCurrentValue[i].value);
-    }
+
+	function disableNum() {
+		let getCurrentValue = getAllInputs;
+			
+		// Trying to limit a total of 12. Disable inputs when totalMaxQty is reached.
+		for (let i = 0; i < getCurrentValue.length; i++) {
+			let allCurrentValue = getCurrentValue[i];
+			let baseValue = parseInt(allCurrentValue.value);
+			let currentValue = parseInt(getCurrentValue[i].value);
+		}
+	}
 }
+
+
